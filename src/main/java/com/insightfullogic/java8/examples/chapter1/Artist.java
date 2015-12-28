@@ -71,7 +71,7 @@ public final class Artist {
         return getName();
     }
 
-    public Artist copy() {
+    public Artist copy() { //todo: Arist::copy는 무엇을 의미하나 C++ 코드가 아닌가?
         List<Artist> members = getMembers().map(Artist::copy).collect(toList());
         return new Artist(name, members, nationality);
     }
