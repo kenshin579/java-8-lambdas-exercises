@@ -15,15 +15,15 @@ public class StringCombiner {
     }
 
     // BEGIN add
-public StringCombiner add(String element) {
-    if (areAtStart()) {
-        builder.append(prefix);
-    } else {
-        builder.append(delim);
+    public StringCombiner add(String element) {
+        if (areAtStart()) {
+            builder.append(prefix);
+        } else {
+            builder.append(delim);
+        }
+        builder.append(element);
+        return this;
     }
-    builder.append(element);
-    return this;
-}
     // END add
 
     private boolean areAtStart() {
@@ -31,17 +31,17 @@ public StringCombiner add(String element) {
     }
 
     // BEGIN merge
-public StringCombiner merge(StringCombiner other) {
-	if (other.builder.length() > 0) {
-        if (areAtStart()) {
-        	builder.append(prefix);
-        } else {
-        	builder.append(delim);
+    public StringCombiner merge(StringCombiner other) {
+        if (other.builder.length() > 0) {
+            if (areAtStart()) {
+                builder.append(prefix);
+            } else {
+                builder.append(delim);
+            }
+            builder.append(other.builder, prefix.length(), other.builder.length());
         }
-        builder.append(other.builder, prefix.length(), other.builder.length());
+        return this;
     }
-    return this;
-}
     // END merge
 
     @Override
