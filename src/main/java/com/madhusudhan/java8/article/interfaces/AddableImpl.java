@@ -11,10 +11,6 @@ import sun.misc.BASE64Decoder;
 import sun.misc.BASE64Encoder;
 
 import java.io.UnsupportedEncodingException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -80,6 +76,9 @@ public class AddableImpl {
         public T add(T t1, T t2);
     }
 
+    /**
+     * 문제점 : 로직을 합치는 것 대신 다른 로직으로 변경하려면 이 로직을 다시 작성해야 해야
+     */
     public void testPreJava8Trade() {
 
         IAddable2<Trade> tradeMerger = new IAddable2<Trade>() {
@@ -155,21 +154,21 @@ public class AddableImpl {
 //        new AddableImpl().aggregateTrades(t1, t2);
 //        new AddableImpl().largeTrades(t1, t2);
 //        new AddableImpl().testPreJava8();
-//        new AddableImpl().testPreJava8Trade();
-
-        List<Trade> trades = new ArrayList<>();
-        trades.add(t2);
-        trades.add(t1);
-
-        System.out.println(trades);
-
-        Collections.sort(trades, new Comparator<Trade>() {
-            @Override
-            public int compare(Trade t1, Trade t2) {
-                return t1.getQuantity() - t2.getQuantity();
-            }
-        });
-
-        System.out.println(trades);
+        new AddableImpl().testPreJava8Trade();
+//
+//        List<Trade> trades = new ArrayList<>();
+//        trades.add(t2);
+//        trades.add(t1);
+//
+//        System.out.println(trades);
+//
+//        Collections.sort(trades, new Comparator<Trade>() {
+//            @Override
+//            public int compare(Trade t1, Trade t2) {
+//                return t1.getQuantity() - t2.getQuantity();
+//            }
+//        });
+//
+//        System.out.println(trades);
     }
 }

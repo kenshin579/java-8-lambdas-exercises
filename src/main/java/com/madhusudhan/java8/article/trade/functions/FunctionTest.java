@@ -16,8 +16,8 @@ import java.util.function.Function;
  * @author mkonda
  */
 public class FunctionTest {
-
-    Function<String, Integer> stringToInt = x -> new Integer(x);
+    //    Function<String, Integer> stringToInt = x -> new Integer(x);
+    Function<String, Integer> stringToInt = Integer::new;
 
     Function<Integer, Double> centToFahrenheitInt = x -> new Double((x * 9 / 5) + 32);
 
@@ -36,11 +36,20 @@ public class FunctionTest {
         return aggregatedQuantity;
     };
 
-
     //using streams!
     Function<List<Trade>, Integer> aggegatedQuantity2 = trades -> {
         int aggregatedQuantity = 0;
-        aggregatedQuantity = trades.stream().map((t) -> t.getQuantity()).reduce(aggregatedQuantity, Integer::sum);
+        aggregatedQuantity = trades.stream()
+                .map((t) -> t.getQuantity())
+                .reduce(aggregatedQuantity, Integer::sum); //todo: 이거 정확하게 이해안됨
+        return aggregatedQuantity;
+    };
+
+    Function<List<Trade>, Integer> aggegatedQuantity3 = trades -> {
+        int aggregatedQuantity = 0;
+//        aggregatedQuantity = trades.stream()
+//                .map((t) -> t.getQuantity())
+//                .sum(); //todo: 이거 안됨
         return aggregatedQuantity;
     };
 
@@ -56,6 +65,18 @@ public class FunctionTest {
 
     private int aggregatedTradeQuantity(List<Trade> trades) {
         int aggQty = aggegatedQuantity.apply(trades);
+        System.out.println("Aggregated quantity: " + aggQty);
+        return aggQty;
+    }
+
+    private int aggregatedTradeQuantity2(List<Trade> trades) {
+        int aggQty = aggegatedQuantity2.apply(trades);
+        System.out.println("Aggregated quantity: " + aggQty);
+        return aggQty;
+    }
+
+    private int aggregatedTradeQuantity3(List<Trade> trades) {
+        int aggQty = aggegatedQuantity2.apply(trades);
         System.out.println("Aggregated quantity: " + aggQty);
         return aggQty;
     }
@@ -79,5 +100,7 @@ public class FunctionTest {
         new FunctionTest().stringToInteger("10");
         new FunctionTest().toFahrenheit(21);
         new FunctionTest().aggregatedTradeQuantity(createTrades());
+        new FunctionTest().aggregatedTradeQuantity2(createTrades());
+        new FunctionTest().aggregatedTradeQuantity3(createTrades());
     }
 }

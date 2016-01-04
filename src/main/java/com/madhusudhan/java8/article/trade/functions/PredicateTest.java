@@ -14,7 +14,16 @@ import java.util.function.Predicate;
  * @author mkonda
  */
 public class PredicateTest {
-    Predicate<Trade> p = t -> t.getQuantity() > 100000;
+
+//    Predicate<Trade> p = new Predicate<Trade>() {
+//        @Override
+//        public boolean test(Trade trade) {
+//            return trade.getQuantity() > 10000;
+//        }
+//    };
+
+    Predicate<Trade> p = t -> t.getQuantity() > 100000; //note: return도 없어짐.
+
 
     private void testBigTrade(Trade t) {
         if (p.test(t))
