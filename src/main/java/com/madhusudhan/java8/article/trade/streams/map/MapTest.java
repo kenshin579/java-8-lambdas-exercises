@@ -23,6 +23,7 @@ public class MapTest {
 
     private Optional<Trade> getTradeById(int tradeId) {
         Optional<Trade> trade = trades.stream()
+                .peek(num -> System.out.println("will filter " + num)) //debugging
                 .filter(t -> t.getTradeId() == tradeId)
                 .findFirst();
         return trade;
@@ -30,7 +31,7 @@ public class MapTest {
 
     private void mapIDsToTrades(Integer[] ids) {
 
-        Stream.of(ids)
+        Stream.of(ids) //1,3
                 .map(id -> getTradeById(id))
                 .forEach(System.out::println);
 
@@ -100,11 +101,11 @@ public class MapTest {
 
     public static void main(String[] args) {
         MapTest test = new MapTest();
-//        Integer[] ids = {1, 3};
+        Integer[] ids = {1, 3};
 //        test.mapIDsToTrades(ids);
 //        test.doubleQty(5000);
 //        test.mapReduce();
-        test.mapReduce1();
-//        test.mapReduce2();
+//        test.mapReduce1();
+        test.mapReduce2();
     }
 }

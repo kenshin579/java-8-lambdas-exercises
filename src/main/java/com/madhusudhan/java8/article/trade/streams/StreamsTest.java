@@ -20,10 +20,12 @@ import java.util.stream.Stream;
  */
 public class StreamsTest {
 
+    private static final String ISSUER = "IBM";
     private final int THRESHOLD = 3000;
     Consumer<Trade> printQuantity = x -> System.out.println("Quantiy: " + x.getQuantity());
     Consumer<Trade> consumer = x -> x.setQuantity(x.getQuantity() * 2);
     Predicate p = null;
+    //    Predicate<Trade> filteredTradesPredicate = (Trade t) -> (t.isBigTrade() && t.isNew() && t.getIssuer().equals(ISSUER));
     List<Trade> trades = TradeUtil.createTrades();
 
     int[] ids = {1, 2, 3};
@@ -33,7 +35,13 @@ public class StreamsTest {
         List<Trade> largeTrades = new ArrayList<Trade>();
 
         for (Trade trade : trades) {
-            if (trade.getQuantity() > THRESHOLD)
+//            if (trade.getQuantity() > THRESHOLD)
+//                largeTrades.add(trade);
+
+            //note: new 로직이 추가된다면
+            if (trade.getQuantity() > THRESHOLD
+                    && trade.getIssuer().equals("IBM")
+                    && trade.getStatus().equals("PENDING"))
                 largeTrades.add(trade);
         }
         return largeTrades;
@@ -44,14 +52,20 @@ public class StreamsTest {
 
         return trades.stream()
                 .filter(trade -> trade.getQuantity() > THRESHOLD)
+
+                        //note: 추가되는 로직
+                .filter(trade -> trade.getIssuer().equals("IBM"))
+                .filter(trade -> trade.getStatus().equals("PENDING"))
+
                 .collect(Collectors.toList());
 
     }
 
     private void createStreams() {
+        //from a collection
         Stream<Trade> tradeStream = trades.stream();
 
-
+        //from a set of objects
         long count = Stream.of(1, 2, 3, 5, 6, 7).count();
         System.out.println("Elements in Stream: " + count);
 
@@ -114,14 +128,14 @@ public class StreamsTest {
     }
 
     public static void main(String[] args) {
-//        new StreamsTest().createStreams();
-        new StreamsTest().findFirstOrElse();
+        new StreamsTest().createStreams();
+//        new StreamsTest().findFirstOrElse();
 //        new StreamsTest().testStreams();
 //        new StreamsTest().testStreamFilters();
         List<Trade> trades = TradeUtil.createTrades();
 
-        List<Trade> oldTrades = new StreamsTest().preJava8LargeTrades(trades);
-        System.out.println("Old Trades: " + oldTrades);
+//        List<Trade> oldTrades = new StreamsTest().preJava8LargeTrades(trades);
+//        System.out.println("Old Trades: " + oldTrades);
         List<Trade> newTrades = new StreamsTest().java8LargeTrades(trades);
         System.out.println("New Trades: " + newTrades);
     }

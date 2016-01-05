@@ -17,18 +17,25 @@ public class InheritanceTest {
         }
     }
 
+//    interface Faculty {
+//        default public String getName() {
+//            return "Faculty";
+//        }
+//    }
+
     interface Faculty extends Person {
         default public String getName() {
             return "Faculty";
         }
     }
 
+    //The Student inherits Faculty's name rather than Person
     class Student implements Faculty, Person {
 
 //        @Override
 //        public String getName() {
-//            return getName(); 
-////            return Person.super.getName(); 
+////            return getName();
+//            return Person.super.getName();
 //        }
     }
 

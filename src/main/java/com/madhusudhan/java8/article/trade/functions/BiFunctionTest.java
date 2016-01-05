@@ -9,6 +9,7 @@ package com.madhusudhan.java8.article.trade.functions;
 import com.madhusudhan.java8.article.trade.Trade;
 
 import java.util.function.BiFunction;
+import java.util.function.BiPredicate;
 
 /**
  * @author mkonda
@@ -24,14 +25,25 @@ public class BiFunctionTest {
         return t1.getQuantity() + t2.getQuantity();
     };
 
+    BiPredicate<Trade, Trade> isBig = (t1, t2) -> t1.getQuantity() > t2.getQuantity();
+
     private void testBiFunction() {
         String result = biFunction.apply("Just", "Java 8");
+        System.out.println("Result: " + result);
+    }
+
+    private void testBiPredicate() {
+        boolean result = isBig.test(
+                new Trade(1, "XT", 20000000, "NEW"),
+                new Trade(1, "XT", 10000, "NEW")
+        );
         System.out.println("Result: " + result);
     }
 
     public static void main(String[] args) {
         BiFunctionTest test = new BiFunctionTest();
         test.testBiFunction();
+        test.testBiPredicate();
     }
 
 }

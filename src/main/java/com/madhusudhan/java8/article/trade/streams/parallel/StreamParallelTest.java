@@ -20,12 +20,12 @@ public class StreamParallelTest {
 
     Consumer<Trade> print = x -> doSomething(x);
     Consumer<Trade> consumer = x -> x.setQuantity(x.getQuantity() * 2);
-    List<Trade> trades = TradeUtil.createTrades(100);
+    List<Trade> trades = TradeUtil.createTrades(40);
 
     private void doSomething(Trade t) {
         try {
             System.out.println(t);
-            TimeUnit.SECONDS.sleep(2);
+            TimeUnit.SECONDS.sleep(1);
         } catch (InterruptedException ex) {
             System.out.println("Sleeping...");
         }
@@ -60,7 +60,10 @@ public class StreamParallelTest {
     public static void main(String[] args) {
         StreamParallelTest test = new StreamParallelTest();
         test.runSequential();
-//        test.runParallel();
+        System.out.println("-----------------------");
+        System.out.println("");
+
+        test.runParallel();
     }
 
 }

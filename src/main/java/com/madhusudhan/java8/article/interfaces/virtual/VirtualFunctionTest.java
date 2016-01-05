@@ -25,8 +25,6 @@ public class VirtualFunctionTest {
         }
     }
 
-    ;
-
     private void test() {
 //        Component c = new Component();
         System.out.println("Component default values: Name: " + c.getComponentName() + ", created on: " + c.getCreationDate());
