@@ -10,7 +10,8 @@ public class CaptureCompileError {
         String name = getUserName();
         name = formatUserName(name);
         // Uncommenting this line should cause a compile error:
-        // button.addActionListener(event -> System.out.println("hi " + name));
+        //실질적 final 변수의 잘못된 사둉으로 컴파일 에러가 발생하는 코드
+//        button.addActionListener(event -> System.out.println("hi " + name));
     }
 
     private String formatUserName(String name) {
