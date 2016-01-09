@@ -1,6 +1,7 @@
 package com.insightfullogic.java8.examples.chapter4;
 
 import com.insightfullogic.java8.examples.chapter1.Album;
+import com.insightfullogic.java8.examples.chapter1.SampleData;
 
 import java.util.IntSummaryStatistics;
 
@@ -19,6 +20,10 @@ public class Primitives {
                 trackLengthStats.getAverage(),
                 trackLengthStats.getSum());
     }
-// END printTrackLengthStatistics
+    // END printTrackLengthStatistics
+
+    public static void main(String[] args) {
+        printTrackLengthStatistics(SampleData.aLoveSupreme);
+    }
 
 }

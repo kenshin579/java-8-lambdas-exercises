@@ -32,6 +32,5 @@ public class OrderDomain extends Order {
     public long countMusicians() {
         return countFeature(album -> album.getMusicians().count());
     }
-// END body
-
+    // END body
 }

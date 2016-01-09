@@ -26,7 +26,7 @@ public class Logger {
     }
 
     private String expensiveOperation() {
-        return "";
+        return "expensiveOperation";
     }
 
     // BEGIN debug_lambda
@@ -42,6 +42,13 @@ public class Logger {
         Logger logger = new Logger();
         logger.debug(() -> "Look at this: " + expensiveOperation());
         // END debug_optimised_lambda
+    }
+
+    public static void main(String[] args) {
+        Logger logger = new Logger();
+
+        logger.example();
+        logger.exampleWithLambda();
     }
 
 }
