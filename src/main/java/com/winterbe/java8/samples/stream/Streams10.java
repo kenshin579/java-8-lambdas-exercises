@@ -39,8 +39,8 @@ public class Streams10 {
 //        test5(persons);
 //        test6(persons);
 //        test7(persons);
-//        test8(persons);
-        test9(persons);
+        test8(persons);
+//        test9(persons);
     }
 
     private static void test1(List<Person> persons) {
@@ -84,11 +84,19 @@ public class Streams10 {
         // IntSummaryStatistics{count=4, sum=76, min=12, average=19,000000, max=23}
     }
 
+    /**
+     * todo: joining에서 어떻게 join하는지 정확하게 이해가 안됨
+     *
+     * @param persons
+     */
     private static void test5(List<Person> persons) {
         String names = persons
                 .stream()
                 .filter(p -> p.age >= 18)
-                .map(p -> p.name)
+                .map(p -> {
+                    System.out.println("p.name :" + p.name);
+                    return p.name;
+                })
                 .collect(Collectors.joining(" and ", "In Germany ", " are of legal age."));
 
         System.out.println(names);

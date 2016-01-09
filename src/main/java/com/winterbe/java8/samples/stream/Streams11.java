@@ -34,9 +34,9 @@ public class Streams11 {
 //        test1(persons);
 //        test2(persons);
 //        test3(persons);
-//        test4(persons);
+        test4(persons);
 //        test5(persons);
-        test6(persons);
+//        test6(persons);
     }
 
     private static void test1(List<Person> persons) {

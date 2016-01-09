@@ -17,7 +17,7 @@ public class Streams5 {
                 Arrays.asList("d2", "a2", "b1", "b3", "c");
 
 //        test1(strings);
-//        test2(strings);
+        test2(strings);
 //        test3(strings);
 //        test4(strings);
 //        test5(strings);
@@ -26,6 +26,12 @@ public class Streams5 {
         test8(strings);
     }
 
+    /**
+     * note: 이거 잘 이해 안됨.
+     * 어떻게 stream을 재사용했다는 건가?
+     *
+     * @param stringCollection
+     */
     private static void test8(List<String> stringCollection) {
         Supplier<Stream<String>> streamSupplier =
                 () -> stringCollection
@@ -42,7 +48,7 @@ public class Streams5 {
                 .stream()
                 .filter(s -> s.startsWith("a"));
 
-        stream.anyMatch(s -> true);
+        stream.anyMatch(s -> true); //note: terminal operator이후 스트림을 다시 사용할 없음.
         stream.noneMatch(s -> true);
     }
 
@@ -97,6 +103,11 @@ public class Streams5 {
                 .forEach(s -> System.out.println("forEach: " + s));
     }
 
+    /**
+     * note: test2 vs test3: intermediate operators 순서에 따라 성능이 달라질 수 있음
+     *
+     * @param stringCollection
+     */
     private static void test3(List<String> stringCollection) {
         stringCollection
                 .stream()
