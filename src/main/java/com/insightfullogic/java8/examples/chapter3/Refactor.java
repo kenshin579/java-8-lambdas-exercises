@@ -1,8 +1,10 @@
 package com.insightfullogic.java8.examples.chapter3;
 
 import com.insightfullogic.java8.examples.chapter1.Album;
+import com.insightfullogic.java8.examples.chapter1.SampleData;
 import com.insightfullogic.java8.examples.chapter1.Track;
 
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -29,7 +31,7 @@ public class Refactor {
             }
             return trackNames;
         }
-// END findLongTracks_0
+        // END findLongTracks_0
     }
 
     public static class Step1 implements LongTrackFinder {
@@ -48,7 +50,7 @@ public class Refactor {
                     });
             return trackNames;
         }
-// END findLongTracks_1
+        // END findLongTracks_1
     }
 
     public static class Step2 implements LongTrackFinder {
@@ -64,7 +66,7 @@ public class Refactor {
                     });
             return trackNames;
         }
-// END findLongTracks_2
+        // END findLongTracks_2
     }
 
     public static class Step3 implements LongTrackFinder {
@@ -80,7 +82,7 @@ public class Refactor {
 
             return trackNames;
         }
-// END findLongTracks_3
+        // END findLongTracks_3
     }
 
     public static class Step4 implements LongTrackFinder {
@@ -92,7 +94,11 @@ public class Refactor {
                     .map(track -> track.getName())
                     .collect(toSet());
         }
-// END findLongTracks_4
+        // END findLongTracks_4
+    }
+
+    public static void main(String[] args) {
+        System.out.println(new Step0().findLongTracks(Arrays.asList(SampleData.aLoveSupreme, SampleData.manyTrackAlbum, SampleData.sampleShortAlbum)));
     }
 
 }

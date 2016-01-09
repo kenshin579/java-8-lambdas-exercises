@@ -2,6 +2,7 @@ package com.insightfullogic.java8.examples.chapter3;
 
 import com.insightfullogic.java8.examples.chapter1.Album;
 import com.insightfullogic.java8.examples.chapter1.Artist;
+import com.insightfullogic.java8.examples.chapter1.SampleData;
 
 import java.util.HashSet;
 import java.util.List;
@@ -51,6 +52,13 @@ public class Decisions {
                 .collect(toSet());
         // END misuse
         return origins;
+    }
+
+    public static void main(String[] args) {
+        Decisions decisions = new Decisions();
+
+        System.out.println(decisions.originsOfBands(SampleData.manyTrackAlbum));
+
     }
 
 }
