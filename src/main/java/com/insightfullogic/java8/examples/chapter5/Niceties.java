@@ -36,7 +36,11 @@ public class Niceties {
     class Java8ArtistService extends ArtistService {
         // BEGIN ARTIST_CACHE_COMPUTE
         public Artist getArtist(String name) {
-            return artistCache.computeIfAbsent(name, this::readArtistFromDB);
+            System.out.println("artist: " + artistCache.size());
+            Artist artist = artistCache.computeIfAbsent(name, this::readArtistFromDB);
+            System.out.println("artist: " + artistCache.size());
+
+            return artist;
         }
         // END ARTIST_CACHE_COMPUTE
     }
@@ -67,6 +71,22 @@ public class Niceties {
             // END COUNT_ALBUMS_VALUES_FOREACH
             return countOfAlbums;
         }
+    }
+
+    public static void computeIfAbsent1() {
+        Map<String, Boolean> whoLetDogsOut = new HashMap<>();
+        whoLetDogsOut.computeIfAbsent("snoop", k -> {
+            System.out.println("creating a value for \"" + k + '"');
+            return k.isEmpty();
+        });
+        whoLetDogsOut.computeIfAbsent("snoop", k -> {
+            System.out.println("creating a value for \"" + k + '"');
+            return k.isEmpty();
+        });
+    }
+
+    public static void main(String[] args) {
+        computeIfAbsent1();
     }
 
 
