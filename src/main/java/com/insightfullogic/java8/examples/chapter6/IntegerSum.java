@@ -52,23 +52,23 @@ public class IntegerSum {
         return IntStream.range(0, size).mapToObj(i -> i);
     }
 
-    @GenerateMicroBenchmark
+    @Benchmark
     public int range() {
         return IntStream.range(0, size).parallel().sum();
     }
 
-    @GenerateMicroBenchmark
+    @Benchmark
     public int serialRange() {
         return IntStream.range(0, size).sum();
     }
 
-    @GenerateMicroBenchmark
+    @Benchmark
     public int array() {
         return IntStream.of(array).parallel().sum();
     }
 
 
-    @GenerateMicroBenchmark
+    @Benchmark
     public int arrayList() {
         return arrayList.parallelStream().mapToInt(i -> i).sum();
     }
@@ -81,42 +81,42 @@ public class IntegerSum {
     }
     // END addIntegers
 
-    @GenerateMicroBenchmark
+    @Benchmark
     public int linkedList() {
         return linkedList.parallelStream().mapToInt(i -> i).sum();
     }
 
-    @GenerateMicroBenchmark
+    @Benchmark
     public int treeSet() {
         return treeSet.parallelStream().mapToInt(i -> i).sum();
     }
 
-    @GenerateMicroBenchmark
+    @Benchmark
     public int hashSet() {
         return hashSet.parallelStream().mapToInt(i -> i).sum();
     }
 
-    @GenerateMicroBenchmark
+    @Benchmark
     public int serialArray() {
         return IntStream.of(array).sum();
     }
 
-    @GenerateMicroBenchmark
+    @Benchmark
     public int serialArrayList() {
         return arrayList.stream().mapToInt(i -> i).sum();
     }
 
-    @GenerateMicroBenchmark
+    @Benchmark
     public int serialLinkedList() {
         return linkedList.stream().mapToInt(i -> i).sum();
     }
 
-    @GenerateMicroBenchmark
+    @Benchmark
     public int serialTreeSet() {
         return treeSet.stream().mapToInt(i -> i).sum();
     }
 
-    @GenerateMicroBenchmark
+    @Benchmark
     public int serialHashSet() {
         return hashSet.stream().mapToInt(i -> i).sum();
     }

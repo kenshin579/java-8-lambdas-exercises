@@ -44,42 +44,42 @@ public class OptimisationExampleFixed {
                 .forEach(container::add);
     }
 
-    @GenerateMicroBenchmark
+    @Benchmark
     public int slowSumOfSquares() {
         return linkedListOfNumbers.parallelStream()
                 .map(x -> x * x)
                 .reduce(0, (acc, x) -> acc + x);
     }
 
-    @GenerateMicroBenchmark
+    @Benchmark
     public int serialSlowSumOfSquares() {
         return linkedListOfNumbers.stream()
                 .map(x -> x * x)
                 .reduce(0, (acc, x) -> acc + x);
     }
 
-    @GenerateMicroBenchmark
+    @Benchmark
     public int intermediateSumOfSquares() {
         return arrayListOfNumbers.parallelStream()
                 .map(x -> x * x)
                 .reduce(0, (acc, x) -> acc + x);
     }
 
-    @GenerateMicroBenchmark
+    @Benchmark
     public int serialIntermediateSumOfSquares() {
         return arrayListOfNumbers.stream()
                 .map(x -> x * x)
                 .reduce(0, (acc, x) -> acc + x);
     }
 
-    @GenerateMicroBenchmark
+    @Benchmark
     public int fastSumOfSquares() {
         return arrayListOfNumbers.parallelStream()
                 .mapToInt(x -> x * x)
                 .sum();
     }
 
-    @GenerateMicroBenchmark
+    @Benchmark
     public int serialFastSumOfSquares() {
         return arrayListOfNumbers.stream()
                 .mapToInt(x -> x * x)

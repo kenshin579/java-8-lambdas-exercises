@@ -30,7 +30,7 @@ public class DiceRolls {
         Main.main(args);
     }
 
-    @GenerateMicroBenchmark
+    @Benchmark
     // BEGIN serial
     public Map<Integer, Double> serialDiceRolls() {
         double fraction = 1.0 / N;
@@ -40,7 +40,7 @@ public class DiceRolls {
     }
     // END serial
 
-    @GenerateMicroBenchmark
+    @Benchmark
     // BEGIN parallel
     public Map<Integer, Double> parallelDiceRolls() {
         double fraction = 1.0 / N;
