@@ -9,21 +9,25 @@ import org.openjdk.jmh.runner.RunnerException;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 import java.util.stream.IntStream;
 
 import static java.util.stream.Collectors.toList;
 
 @State(Scope.Benchmark)
 @BenchmarkMode(Mode.AverageTime)
+@OutputTimeUnit(TimeUnit.MICROSECONDS)
 public class ArraySum {
 
     public static void main(String[] ignore) throws IOException, RunnerException {
         final String[] args = {
                 ".*ArraySum.*",
                 "-wi",
-                "5",
+                "2",
                 "-i",
-                "5"
+                "2",
+                "-f",
+                "2"
         };
         Main.main(args);
     }
@@ -32,7 +36,7 @@ public class ArraySum {
 
     @Setup
     public void initAlbums() {
-        int n = Integer.getInteger("arraysum.size", 1000);
+        int n = Integer.getInteger("arraysum.size", 5000); //todo: 이건 어디서 나온 금액일까?
         albums = IntStream.range(0, n)
                 .mapToObj(i -> SampleData.aLoveSupreme.copy())
                 .collect(toList());

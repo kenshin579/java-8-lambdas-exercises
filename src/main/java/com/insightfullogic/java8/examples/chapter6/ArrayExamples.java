@@ -8,7 +8,7 @@ public class ArrayExamples {
     // BEGIN simpleMovingAverage
     public static double[] simpleMovingAverage(double[] values, int n) {
         double[] sums = Arrays.copyOf(values, values.length); // <1>
-        Arrays.parallelPrefix(sums, Double::sum); // <2>
+        Arrays.parallelPrefix(sums, Double::sum); // <2> //todo: 이해 안됨
         int start = n - 1;
         return IntStream.range(start, sums.length) // <3>
                 .mapToDouble(i -> {
@@ -37,4 +37,20 @@ public class ArrayExamples {
     }
     // END imperativeInitilize
 
+    private static void arrayParallelPrefix() {
+        double[] array = {1.0, 2.0, 3.0};
+        Arrays.parallelPrefix(array, (x, y) -> {
+            System.out.println("x:" + x + " y:" + y);
+            return x + y;
+        });
+
+        for (double x : array) {
+            System.out.println("x:" + x);
+        }
+    }
+
+    public static void main(String[] args) {
+        arrayParallelPrefix();
+
+    }
 }

@@ -22,9 +22,9 @@ public class IntegerSum {
         final String[] args = {
                 ".*IntegerSum.*",
                 "-wi",
-                "10",
+                "1",
                 "-i",
-                "20",
+                "1",
                 "-f",
                 "1"
         };

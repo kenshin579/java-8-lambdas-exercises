@@ -23,9 +23,11 @@ public class DiceRolls {
         final String[] args = {
                 ".*DiceRolls.*",
                 "-wi",
-                "5",
+                "2",
                 "-i",
-                "5"
+                "2",
+                "-f",
+                "2"
         };
         Main.main(args);
     }
@@ -46,12 +48,13 @@ public class DiceRolls {
         double fraction = 1.0 / N;
         return IntStream.range(0, N)                        // <1>
                 .parallel()                         // <2>
-                .mapToObj(twoDiceThrows())          // <3>
+                .mapToObj(twoDiceThrows())          // <3>: todo: mapToInt로 사용해야 하지 않나? (의도는 Int관련 작업을 해야 하니까?)
                 .collect(groupingBy(side -> side,   // <4>
                         summingDouble(n -> fraction))); // <5>
     }
     // END parallel
 
+    //함수를 리턴한 거임.
     private static IntFunction<Integer> twoDiceThrows() {
         return i -> {
             ThreadLocalRandom random = ThreadLocalRandom.current();
