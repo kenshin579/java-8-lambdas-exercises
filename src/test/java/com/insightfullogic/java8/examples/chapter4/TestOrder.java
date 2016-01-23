@@ -24,8 +24,8 @@ public class TestOrder {
     private Order order;
 
     @Parameters
-    public static Collection<Object[]> data() {
-        Object[][] data = new Object[][]{of(OrderImperative::new), of(OrderStreams::new), of(OrderDomain::new)};
+    public static Collection<Object[]> data() { //todo: 이부분 잘 이해가 안됨.
+        Object[][] data = new Object[][]{of((albums) -> new OrderImperative(albums)), of(OrderStreams::new), of(OrderDomain::new)};
         return asList(data);
     }
 
@@ -33,7 +33,7 @@ public class TestOrder {
     }
 
     private static Object[] of(OrderFactory factory) {
-        return new Object[]{factory};
+        return new Object[]{factory}; //note: factory 람다식(new..)한 객체 반한홤
     }
 
     public TestOrder(OrderFactory factory) {
@@ -44,7 +44,7 @@ public class TestOrder {
     public void initOrder() {
         List<Track> tracks = asList(new Track("Acknowledgement", 467), new Track("Resolution", 442));
         Album aLoveSupreme = new Album("A Love Supreme", tracks, asList(SampleData.johnColtrane));
-        order = factory.apply(asList(aLoveSupreme));
+        order = factory.apply(asList(aLoveSupreme)); //실제로 여기서 실행함.
     }
 
     @Test

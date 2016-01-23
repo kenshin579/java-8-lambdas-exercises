@@ -1,5 +1,10 @@
 package com.insightfullogic.java8.examples.chapter7;
 
+import com.insightfullogic.java8.examples.chapter1.Album;
+import com.insightfullogic.java8.examples.chapter1.Artist;
+import com.insightfullogic.java8.examples.chapter1.SampleData;
+import com.insightfullogic.java8.examples.chapter1.Track;
+import org.junit.Before;
 import org.junit.Test;
 
 import java.util.Arrays;
@@ -11,6 +16,9 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 public class TestingTest {
+
+    private Album aLoveSupreme;
+
 
     // BEGIN to_uppercase
     @Test
@@ -52,4 +60,31 @@ public class TestingTest {
         // END mockito_lambdas
     }
 
+    @Before
+    public void setUp() throws Exception {
+        List<Track> tracks = asList(new Track("Acknowledgement", 467), new Track("Resolution", 442));
+        aLoveSupreme = new Album("A Love Supreme", tracks, asList(SampleData.johnColtrane, new Artist("The Korean Band", "KR")));
+
+    }
+
+    @Test
+    public void testImperativeNationalityReport() throws Exception {
+        for (String str : Testing.imperativeNationalityReport(aLoveSupreme)) {
+            System.out.println("str: " + str);
+        }
+    }
+
+    @Test
+    public void testForEachLoggingFailure() throws Exception {
+        for (String str : Testing.forEachLoggingFailure(aLoveSupreme)) {
+            System.out.println("str: " + str);
+        }
+    }
+
+    @Test
+    public void testNationalityReportUsingPeek() throws Exception {
+        for (String str : Testing.nationalityReportUsingPeek(aLoveSupreme)) {
+            System.out.println("str: " + str);
+        }
+    }
 }

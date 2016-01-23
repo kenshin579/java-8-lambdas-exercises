@@ -15,7 +15,7 @@ public class OrderImperative extends Order {
     // BEGIN body
     public long countRunningTime() {
         long count = 0;
-        for (Album album : albums) {
+        for (Album album : albums) { //note: <-- 반복됨
             for (Track track : album.getTrackList()) {
                 count += track.getLength();
             }
@@ -25,7 +25,7 @@ public class OrderImperative extends Order {
 
     public long countMusicians() {
         long count = 0;
-        for (Album album : albums) {
+        for (Album album : albums) { //note: <-- 반복됨
             count += album.getMusicianList().size();
         }
         return count;
@@ -33,7 +33,7 @@ public class OrderImperative extends Order {
 
     public long countTracks() {
         long count = 0;
-        for (Album album : albums) {
+        for (Album album : albums) { //note: <-- 반복됨
             count += album.getTrackList().size();
         }
         return count;

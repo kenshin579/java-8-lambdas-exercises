@@ -35,7 +35,7 @@ public class Testing {
     // BEGIN firstToUpperCase_reference
     public static List<String> elementFirstToUppercase(List<String> words) {
         return words.stream()
-                .map(Testing::firstToUppercase)
+                .map(Testing::firstToUppercase) //note: 메서드 참조를 사용함. unit test에서 이부분은 테스트하기 쉽게
                 .collect(Collectors.<String>toList());
     }
 
