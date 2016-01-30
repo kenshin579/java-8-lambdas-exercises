@@ -7,16 +7,15 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class OpenClosedPrinciple {
 
     public void asHigherOrderFunctions() {
-// BEGIN local_formatter
+
 // One implementation
         ThreadLocal<DateFormat> localFormatter
                 = ThreadLocal.withInitial(() -> new SimpleDateFormat());
 
 // Usage
         DateFormat formatter = localFormatter.get();
-// END local_formatter
 
-// BEGIN local_thread_id
+
 // Or...
         AtomicInteger threadId = new AtomicInteger();
         ThreadLocal<Integer> localId
@@ -24,7 +23,7 @@ public class OpenClosedPrinciple {
 
 // Usage
         int idForThisThread = localId.get();
-// END local_thread_id
+
     }
 
 

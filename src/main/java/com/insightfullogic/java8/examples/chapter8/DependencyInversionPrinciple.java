@@ -16,7 +16,13 @@ public class DependencyInversionPrinciple {
     }
 
     public static class NoDIP implements HeadingFinder {
-        // BEGIN nodip_headings
+
+        /**
+         * 문제: 문장을 분석하는 코드와 파일을 다루는 메서드로 분리해야 함
+         *
+         * @param input
+         * @return
+         */
         public List<String> findHeadings(Reader input) {
             try (BufferedReader reader = new BufferedReader(input)) {
                 return reader.lines()
@@ -27,11 +33,12 @@ public class DependencyInversionPrinciple {
                 throw new HeadingLookupException(e);
             }
         }
-        // END nodip_headings
     }
 
+    /**
+     * todo: 이 코드 잘 이해가 안됨.
+     */
     public static class ExtractedDIP implements HeadingFinder {
-        // BEGIN refactored_headings
         public List<String> findHeadings(Reader input) {
             return withLinesOf(input,
                     lines -> lines.filter(line -> line.endsWith(":"))
@@ -39,20 +46,17 @@ public class DependencyInversionPrinciple {
                             .collect(toList()),
                     HeadingLookupException::new);
         }
-        // END refactored_headings
 
-        // BEGIN with_lines_Of
         private <T> T withLinesOf(Reader input,
                                   Function<Stream<String>, T> handler,
                                   Function<IOException, RuntimeException> error) {
-
             try (BufferedReader reader = new BufferedReader(input)) {
                 return handler.apply(reader.lines());
             } catch (IOException e) {
                 throw error.apply(e);
             }
         }
-        // END with_lines_Of
+
     }
 
 }

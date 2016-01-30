@@ -2,9 +2,13 @@ package com.insightfullogic.java8.examples.chapter8.template_method.traditional;
 
 import com.insightfullogic.java8.examples.chapter8.template_method.ApplicationDenied;
 
-// BEGIN LoanApplication
 public abstract class LoanApplication {
 
+    /**
+     * 전체 알고리즘을 담고 있음.
+     *
+     * @throws ApplicationDenied
+     */
     public void checkLoanApplication() throws ApplicationDenied {
         checkIdentity();
         checkCreditHistory();
@@ -19,9 +23,5 @@ public abstract class LoanApplication {
     protected abstract void checkCreditHistory() throws ApplicationDenied;
 
     private void reportFindings() {
-// END LoanApplication
-
     }
-
-
 }

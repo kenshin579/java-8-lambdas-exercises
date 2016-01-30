@@ -2,7 +2,6 @@ package com.insightfullogic.java8.examples.chapter8.template_method.lambdas;
 
 import com.insightfullogic.java8.examples.chapter8.template_method.ApplicationDenied;
 
-// BEGIN LoanApplication
 public class LoanApplication {
 
     private final Criteria identity;
@@ -18,6 +17,11 @@ public class LoanApplication {
         this.incomeHistory = incomeHistory;
     }
 
+    /**
+     * 전체 알고리즘을 담고 있다.
+     *
+     * @throws ApplicationDenied
+     */
     public void checkLoanApplication() throws ApplicationDenied {
         identity.check();
         creditHistory.check();
@@ -26,8 +30,5 @@ public class LoanApplication {
     }
 
     private void reportFindings() {
-// END LoanApplication
-
     }
-
 }

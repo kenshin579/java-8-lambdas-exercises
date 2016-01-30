@@ -8,13 +8,11 @@ public class MacrosTest {
     public void classBasedCommand() {
         MockEditor editor = new MockEditor();
 
-// BEGIN classBasedCommand
         Macro macro = new Macro();
         macro.record(new Open(editor));
         macro.record(new Save(editor));
         macro.record(new Close(editor));
         macro.run();
-// END classBasedCommand
 
         editor.check();
     }
@@ -23,13 +21,12 @@ public class MacrosTest {
     public void lambdaBasedCommand() {
         MockEditor editor = new MockEditor();
 
-// BEGIN lambdaBasedCommand
+        //note: 람다식을 이용하면 클래스 없이도 간단하게 사용할 수 있음 (Save, Save, Close)
         Macro macro = new Macro();
         macro.record(() -> editor.open());
         macro.record(() -> editor.save());
         macro.record(() -> editor.close());
         macro.run();
-// END lambdaBasedCommand
 
         editor.check();
     }
@@ -38,13 +35,11 @@ public class MacrosTest {
     public void referenceBasedCommand() {
         MockEditor editor = new MockEditor();
 
-// BEGIN referenceBasedCommand
         Macro macro = new Macro();
         macro.record(editor::open);
         macro.record(editor::save);
         macro.record(editor::close);
         macro.run();
-// END referenceBasedCommand
 
         editor.check();
     }

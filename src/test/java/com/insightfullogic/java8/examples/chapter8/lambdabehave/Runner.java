@@ -3,13 +3,16 @@ package com.insightfullogic.java8.examples.chapter8.lambdabehave;
 import com.insightfullogic.java8.examples.chapter8.lambdabehave.example.StackSpec;
 import com.insightfullogic.java8.examples.chapter8.lambdabehave.reporting.*;
 
+/**
+ * todo: enum Runner는 뭐하는 역할을 하나?
+ */
 public enum Runner {
 
-    current;
+    current; //todo: 이건 뭔가?
 
     private final Report report;
 
-    private Runner() {
+    Runner() {
         report = new Report();
     }
 
@@ -28,11 +31,6 @@ public enum Runner {
         report.newSpecification(suite, specificationReport);
     }
 
-    public static void main(String[] args) {
-        current.run(StackSpec.class);
-        current.printReport();
-    }
-
     private void printReport() {
         ReportFormatter formatter = new ConsoleFormatter();
         formatter.format(report);
@@ -46,6 +44,11 @@ public enum Runner {
         } catch (IllegalAccessException e) {
             e.printStackTrace();
         }
+    }
+
+    public static void main(String[] args) {
+        current.run(StackSpec.class);
+        current.printReport();
     }
 
 }
