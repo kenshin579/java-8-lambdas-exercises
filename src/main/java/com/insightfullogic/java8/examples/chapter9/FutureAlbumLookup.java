@@ -22,12 +22,12 @@ public class FutureAlbumLookup implements AlbumLookup {
         this.artists = artists;
     }
 
-    // BEGIN lookupByName
     @Override
     public Album lookupByName(String albumName) {
         Future<Credentials> trackLogin = loginTo("track"); // <1>
         Future<Credentials> artistLogin = loginTo("artist");
 
+        // 다른 line으로 넘어가지 않는다 trackLogin.get(), artistLogin.get()을 받기전까지는.. 이 코드는 성능에 이슈가 있음
         try {
             Future<List<Track>> tracks = lookupTracks(albumName, trackLogin.get()); // <2>
             Future<List<Artist>> artists = lookupArtists(albumName, artistLogin.get());
@@ -37,7 +37,6 @@ public class FutureAlbumLookup implements AlbumLookup {
             throw new AlbumLookupException(e.getCause()); // <4>
         }
     }
-    // END lookupByName
 
     // ----------------- FAKE LOOKUP METHODS -----------------
     //         Represent API lookup on external services

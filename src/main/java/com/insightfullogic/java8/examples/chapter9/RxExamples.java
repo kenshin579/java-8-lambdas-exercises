@@ -20,7 +20,14 @@ public class RxExamples {
                 .collect(toList());
     }
 
-    // BEGIN search
+    /**
+     * 음악가를 이름과 국적에 따라 분류하여 결과를 반환함
+     *
+     * @param searchedName
+     * @param searchedNationality
+     * @param maxResults
+     * @return
+     */
     public Observable<Artist> search(String searchedName,
                                      String searchedNationality,
                                      int maxResults) {
@@ -30,9 +37,8 @@ public class RxExamples {
                 .flatMap(this::lookupArtist) // <3>
                 .filter(artist -> artist.getNationality() // <4>
                         .contains(searchedNationality))
-                .take(maxResults); // <5>
+                .take(maxResults); // <5> //todo: take가 하는 일은?
     }
-    // END search
 
     //  ------------------ FAKE LOOKUP CODE ------------------
     //          Again, imaginary external web services
@@ -54,17 +60,12 @@ public class RxExamples {
     public void creationCodeSample() {
         Observer<String> observer = null;
 
-// BEGIN completing_observable
         observer.onNext("a");
         observer.onNext("b");
         observer.onNext("c");
         observer.onCompleted();
-// END completing_observable
 
-// BEGIN error_observable
         observer.onError(new Exception());
-// END error_observable
-
     }
 
 }
