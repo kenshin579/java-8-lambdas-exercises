@@ -73,13 +73,11 @@ public class IntegerSum {
         return arrayList.parallelStream().mapToInt(i -> i).sum();
     }
 
-    // BEGIN addIntegers
     private int addIntegers(List<Integer> values) {
         return values.parallelStream()
                 .mapToInt(i -> i)
                 .sum();
     }
-    // END addIntegers
 
     @Benchmark
     public int linkedList() {

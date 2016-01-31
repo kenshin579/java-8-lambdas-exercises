@@ -47,7 +47,7 @@ public class StreamTest {
         int count = Stream.of(1, 2, 3)
                 .reduce(0, (acc, element) -> acc + element);
 
-        System.out.println(count);
+        System.out.println(count); //6
     }
 
     public static void testReduce2() {
@@ -119,6 +119,9 @@ public class StreamTest {
         IntStream.range(1, 4)
                 .mapToObj(i -> "a" + i)
                 .forEach(System.out::println);
+        //a1
+        //a2
+        //a3
     }
     public static void main(String[] args) {
         testStream7();

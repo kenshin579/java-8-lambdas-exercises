@@ -6,7 +6,7 @@ public interface Parent {
     public void message(String body);
 
     public default void welcome() {
-        message("Parent: Hi!");
+        message("IParent: Hi!");
     }
 
     public String getLastMessage();

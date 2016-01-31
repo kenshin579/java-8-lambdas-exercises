@@ -19,52 +19,41 @@ public class TestingTest {
 
     private Album aLoveSupreme;
 
-
-    // BEGIN to_uppercase
     @Test
     public void multipleWordsToUppercase() {
         List<String> input = Arrays.asList("a", "b", "hello");
         List<String> result = Testing.allToUpperCase(input);
         assertEquals(asList("A", "B", "HELLO"), result);
     }
-    // END to_uppercase
 
-    // BEGIN twoLetterStringConvertedToUppercaseLambdas
     @Test
     public void twoLetterStringConvertedToUppercaseLambdas() {
         List<String> input = Arrays.asList("ab");
         List<String> result = Testing.elementFirstToUpperCaseLambdas(input);
         assertEquals(asList("Ab"), result);
     }
-    // END twoLetterStringConvertedToUppercaseLambdas
 
-    // BEGIN twoLetterStringConvertedToUppercase
     @Test
     public void twoLetterStringConvertedToUppercase() {
         String input = "ab";
         String result = Testing.firstToUppercase(input);
         assertEquals("Ab", result);
     }
-    // END twoLetterStringConvertedToUppercase
 
     private List<Integer> otherList = Arrays.asList(1, 2, 3);
 
     @Test
     public void mockitoLambdas() {
-        // BEGIN mockito_lambdas
         List<String> list = mock(List.class);
-
         when(list.size()).thenAnswer(inv -> otherList.size());
 
         assertEquals(3, list.size());
-        // END mockito_lambdas
     }
 
     @Before
     public void setUp() throws Exception {
         List<Track> tracks = asList(new Track("Acknowledgement", 467), new Track("Resolution", 442));
         aLoveSupreme = new Album("A Love Supreme", tracks, asList(SampleData.johnColtrane, new Artist("The Korean Band", "KR")));
-
     }
 
     @Test
@@ -84,7 +73,7 @@ public class TestingTest {
     @Test
     public void testNationalityReportUsingPeek() throws Exception {
         for (String str : Testing.nationalityReportUsingPeek(aLoveSupreme)) {
-            System.out.println("str: " + str);
+//            System.out.println("str: " + str);
         }
     }
 }

@@ -26,61 +26,49 @@ public class CollectorExamples {
 
     public static void toCollectionTreeset() {
         Stream<Integer> stream = Stream.of(1, 2, 3);
-        // BEGIN TO_COLLECTION_TREESET
+
         stream.collect(toCollection(TreeSet::new));
-        // END TO_COLLECTION_TREESET
     }
 
-    // BEGIN BIGGEST_GROUP
     //note: 구성원 수가 가장 많은 밴드를 찾는 코드
     public static Optional<Artist> biggestGroup(Stream<Artist> artists) {
         Function<Artist, Long> getCount = artist -> artist.getMembers().count();
 
-        return artists.collect(maxBy(comparing(getCount)));
+        //todo: 잘 이해 안됨.
+        return artists.collect(maxBy(comparing(getCount))); //Optional[The Beatles]
     }
-    // END BIGGEST_GROUP
 
-    // BEGIN BANDS_AND_SOLO
     public static Map<Boolean, List<Artist>> bandsAndSolo(Stream<Artist> artists) {
         return artists.collect(partitioningBy(artist -> artist.isSolo()));
+        //{false=[The Beatles], true=[John Coltrane, John Lennon]}
     }
-    // END BANDS_AND_SOLO
 
-    // BEGIN BANDS_AND_SOLO_REF
     public static Map<Boolean, List<Artist>> bandsAndSoloRef(Stream<Artist> artists) {
         return artists.collect(partitioningBy(Artist::isSolo));
     }
-    // END BANDS_AND_SOLO_REF
 
-    // BEGIN ALBUMS_BY_ARTIST
     public static Map<Artist, List<Album>> albumsByArtist(Stream<Album> albums) {
         return albums.collect(groupingBy(album -> album.getMainMusician()));
     }
-    // END ALBUMS_BY_ARTIST
 
     public static Map<Artist, Integer> numberOfAlbumsDumb(Stream<Album> albums) {
-        // BEGIN NUMBER_OF_ALBUMS_DUMB
         Map<Artist, List<Album>> albumsByArtist
                 = albums.collect(groupingBy(album -> album.getMainMusician()));
 
         Map<Artist, Integer> numberOfAlbums = new HashMap<>();
-        albumsByArtist.forEach((k, v) -> numberOfAlbums.put(k, v.size()));
 
-//        for (Entry<Artist, List<Album>> entry : albumsByArtist.entrySet()) {
-//            numberOfAlbums.put(entry.getKey(), entry.getValue().size());
-//        }
-        // END NUMBER_OF_ALBUMS_DUMB
-        return numberOfAlbums;
+        for (Entry<Artist, List<Album>> entry : albumsByArtist.entrySet()) {
+            numberOfAlbums.put(entry.getKey(), entry.getValue().size());
+        }
+
+        return numberOfAlbums; //{John Coltrane=1}
     }
 
-    // BEGIN NUMBER_OF_ALBUMS
     public static Map<Artist, Long> numberOfAlbums(Stream<Album> albums) {
         return albums.collect(groupingBy(album -> album.getMainMusician(),
-                counting()));
+                counting())); //{John Coltrane=1}
     }
-    // END NUMBER_OF_ALBUMS
 
-    // BEGIN NAME_OF_ALBUMS_DUMB
     public static Map<Artist, List<String>> nameOfAlbumsDumb(Stream<Album> albums) {
         Map<Artist, List<Album>> albumsByArtist =
                 albums.collect(groupingBy(album -> album.getMainMusician()));
@@ -92,16 +80,13 @@ public class CollectorExamples {
                     .map(Album::getName)
                     .collect(toList()));
         }
-        return nameOfAlbums;
+        return nameOfAlbums; //{John Coltrane=[A Love Supreme]}
     }
-    // END NAME_OF_ALBUMS_DUMB
 
-    // BEGIN NAME_OF_ALBUMS
     public static Map<Artist, List<String>> nameOfAlbums(Stream<Album> albums) {
         return albums.collect(groupingBy(Album::getMainMusician,
-                mapping(Album::getName, toList())));
+                mapping(Album::getName, toList()))); //{John Coltrane=[A Love Supreme]}
     }
-    // END NAME_OF_ALBUMS
 
     public static Map<String, Long> countWords(Stream<String> words) {
         return words.collect(groupingBy(word -> word, counting()));
@@ -117,12 +102,10 @@ public class CollectorExamples {
         return countWords(words);
     }
 
-    // BEGIN averagingTracks
     public static double averageNumberOfTracks(List<Album> albums) {
         return albums.stream()
-                .collect(averagingInt(album -> album.getTrackList().size()));
+                .collect(averagingInt(album -> album.getTrackList().size())); //2.6666666666666665
     }
-    // END averagingTracks
 
     static class StudentClass {
 
@@ -151,7 +134,6 @@ public class CollectorExamples {
         }
     }
 
-
     private static void groupingBy1() {
         List<StudentClass> studentClasses = new ArrayList<>();
 
@@ -170,8 +152,13 @@ public class CollectorExamples {
                 (k, v) -> System.out.println("Key : " + k + " Value : " + v)
         );
 
-    }
+//        Key : White Value : [StudentClass{teacher='White', level=102.0, className='Advanced Java'}]
+//        Key : Kumar Value : [StudentClass{teacher='Kumar', level=101.0, className='Intro to Web'},
+//                              StudentClass{teacher='Kumar', level=101.0, className='Intro to Cobol'}]
+//        Key : Sargent Value : [StudentClass{teacher='Sargent', level=101.0, className='Intro to Web'},
+//                              StudentClass{teacher='Sargent', level=102.0, className='Advanced Web'}]
 
+    }
 
     public static void main(String[] args) {
 //        System.out.println(biggestGroup(SampleData.threeArtists()));
@@ -183,7 +170,8 @@ public class CollectorExamples {
         //todo: stream has already been operated upon or closed가 발생함. 왜 일까?
 //        System.out.println(numberOfAlbumsDumb(SampleData.albums));
 //        System.out.println(numberOfAlbums(SampleData.albums));
-        System.out.println(nameOfAlbumsDumb(SampleData.albums));
+//        System.out.println(nameOfAlbumsDumb(SampleData.albums));
+        System.out.println(nameOfAlbums(SampleData.albums));
 
     }
 }

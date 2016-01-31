@@ -23,9 +23,9 @@ public class ArraySum {
         final String[] args = {
                 ".*ArraySum.*",
                 "-wi",
-                "2",
+                "10",
                 "-i",
-                "2",
+                "10",
                 "-f",
                 "2"
         };
@@ -43,23 +43,19 @@ public class ArraySum {
     }
 
     @Benchmark
-    // BEGIN serial
     public int serialArraySum() {
         return albums.stream()
                 .flatMap(Album::getTracks)
                 .mapToInt(Track::getLength)
                 .sum();
     }
-    // END serial
+
 
     @Benchmark
-    // BEGIN parallel
     public int parallelArraySum() {
         return albums.parallelStream()
                 .flatMap(Album::getTracks)
                 .mapToInt(Track::getLength)
                 .sum();
     }
-    // END parallel
-
 }

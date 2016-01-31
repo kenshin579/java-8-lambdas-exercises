@@ -4,9 +4,6 @@ import java.util.Arrays;
 import java.util.stream.IntStream;
 
 public class ArrayExamples {
-
-    // BEGIN simpleMovingAverage
-
     /**
      * @param values
      * @param n      구간을 의미함
@@ -31,17 +28,13 @@ public class ArrayExamples {
 
         //result: 1, 2, 3, 3,5
     }
-    // END simpleMovingAverage
 
-    // BEGIN parallelInitialize
     public static double[] parallelInitialize(int size) {
         double[] values = new double[size];
         Arrays.parallelSetAll(values, i -> i);
         return values;
     }
-    // END parallelInitialize
 
-    // BEGIN imperativeInitilize
     public static double[] imperativeInitilize(int size) {
         double[] values = new double[size];
         for (int i = 0; i < values.length; i++) {
@@ -49,7 +42,6 @@ public class ArrayExamples {
         }
         return values;
     }
-    // END imperativeInitilize
 
     private static void arrayParallelPrefix() {
         double[] array = {1.0, 2.0, 3.0};
@@ -58,22 +50,29 @@ public class ArrayExamples {
             return x + y;
         });
 
+//        x:1.0 y:2.0
+//        x:3.0 y:3.0
+
         for (double x : array) {
             System.out.println("x:" + x);
         }
+
+//        x:1.0
+//        x:3.0
+//        x:6.0
     }
 
     public static void main(String[] args) {
-//        arrayParallelPrefix();
+        arrayParallelPrefix();
 
 //        for (double value : parallelInitialize(5)) {
 //            System.out.println(value);
 //        }
 
-        double[] array = {0, 1, 2, 3, 4, 3.5};
-        for (double value : simpleMovingAverage(array, 3)) {
-            System.out.println(value);
-        }
+//        double[] array = {0, 1, 2, 3, 4, 3.5};
+//        for (double value : simpleMovingAverage(array, 3)) {
+//            System.out.println(value);
+//        }
 
     }
 }

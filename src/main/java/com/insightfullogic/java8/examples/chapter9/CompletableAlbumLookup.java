@@ -32,14 +32,13 @@ public class CompletableAlbumLookup implements AlbumLookup {
         CompletableFuture<List<Artist>> artistLookup
                 = loginTo("artist")
                 .thenCompose(artistLogin -> lookupArtists(albumName, artistLogin));  // <1>
-        //<1>: thenCompose 메소드는 로그인으로 얻은 자격 정보를 음악가를 포함하는 CompletableFuture로 반환함
-        //-
+        //<1>: note: thenCompose 메소드는 로그인으로 얻은 자격 정보를 음악가를 포함하는 CompletableFuture로 반환함
 
         return loginTo("track")
                 .thenCompose(trackLogin -> lookupTracks(albumName, trackLogin)) // <2>
                 .thenCombine(artistLookup, (tracks, artists)
                         -> new Album(albumName, tracks, artists)) // <3>
-                .join(); // <4>: Future.get() 대신에 결과값을
+                .join(); // <4>: note: Future.get() 대신에 결과값을
     }
 
     // Variables Exists to satisfy code sample below

@@ -10,7 +10,6 @@ package com.madhusudhan.java8.article.methodrefs;
  * @author mkonda
  */
 public class AddableUtil {
-
     public static int addThemUp(int i1, int i2) {
         return i1 + i2;
     }

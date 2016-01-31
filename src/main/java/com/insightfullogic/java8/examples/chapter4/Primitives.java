@@ -7,7 +7,6 @@ import java.util.IntSummaryStatistics;
 
 public class Primitives {
 
-    // BEGIN printTrackLengthStatistics
     public static void printTrackLengthStatistics(Album album) {
         IntSummaryStatistics trackLengthStats
                 = album.getTracks()
@@ -19,8 +18,9 @@ public class Primitives {
                 trackLengthStats.getMin(),
                 trackLengthStats.getAverage(),
                 trackLengthStats.getSum());
+
+        //Max: 467, Min: 442, Ave: 454.500000, Sum: 909
     }
-    // END printTrackLengthStatistics
 
     public static void main(String[] args) {
         printTrackLengthStatistics(SampleData.aLoveSupreme);

@@ -24,12 +24,6 @@ public class CompressorTest {
     @Test
     public void testClassBasedExample() throws Exception {
         Compressor.classBasedExample(inFile, outFile);
-
     }
 
-    @Test
-    public void testName() throws Exception {
-
-
-    }
 }

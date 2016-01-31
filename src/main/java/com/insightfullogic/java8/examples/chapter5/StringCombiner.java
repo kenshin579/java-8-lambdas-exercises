@@ -14,7 +14,6 @@ public class StringCombiner {
         builder = new StringBuilder();
     }
 
-    // BEGIN add
     public StringCombiner add(String element) {
         if (areAtStart()) {
             builder.append(prefix);
@@ -24,13 +23,11 @@ public class StringCombiner {
         builder.append(element);
         return this;
     }
-    // END add
 
     private boolean areAtStart() {
         return builder.length() == 0;
     }
 
-    // BEGIN merge
     public StringCombiner merge(StringCombiner other) {
         if (other.builder.length() > 0) {
             if (areAtStart()) {
@@ -42,7 +39,6 @@ public class StringCombiner {
         }
         return this;
     }
-    // END merge
 
     @Override
     public String toString() {

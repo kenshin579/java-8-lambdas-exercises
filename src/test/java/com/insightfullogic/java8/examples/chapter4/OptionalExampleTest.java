@@ -10,12 +10,10 @@ public class OptionalExampleTest {
 
     @Test
     public void examples() {
-// BEGIN value_creation
+
         Optional<String> a = Optional.of("a");
         assertEquals("a", a.get());
-// END value_creation
 
-// BEGIN is_present
         Optional emptyOptional = Optional.empty();
         Optional alsoEmpty = Optional.ofNullable(null);
 
@@ -23,12 +21,10 @@ public class OptionalExampleTest {
 
 // a is defined above
         assertTrue(a.isPresent());
-// END is_present
 
-// BEGIN orElse
         assertEquals("b", emptyOptional.orElse("b"));
         assertEquals("c", emptyOptional.orElseGet(() -> "c"));
-// END orElse
+
     }
 
 }

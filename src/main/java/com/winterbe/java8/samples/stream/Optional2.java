@@ -21,7 +21,8 @@ public class Optional2 {
     }
 
     static class Nested {
-        Inner inner = new Inner();
+        //        Inner inner = new Inner();
+        Inner inner = null;
 
         public Inner getInner() {
             return inner;
@@ -30,17 +31,11 @@ public class Optional2 {
 
     static class Inner {
         String foo = "boo";
+//        String foo = null;
 
         public String getFoo() {
             return foo;
         }
-    }
-
-    public static void main(String[] args) {
-        test0();
-//        test1();
-//        test2();
-//        test3();
     }
 
     public static <T> Optional<T> resolve(Supplier<T> resolver) {
@@ -83,9 +78,15 @@ public class Optional2 {
      */
     private static void test0() {
         Outer outer = new Outer();
-
         if (outer != null && outer.nested != null && outer.nested.inner != null) {
             System.out.println(outer.nested.inner.foo);
         }
+    }
+
+    public static void main(String[] args) {
+//        test0();
+        test1();
+//        test2();
+//        test3();
     }
 }

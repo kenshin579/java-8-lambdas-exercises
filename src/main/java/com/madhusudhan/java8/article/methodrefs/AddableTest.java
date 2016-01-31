@@ -5,10 +5,14 @@ package com.madhusudhan.java8.article.methodrefs;
  */
 public class AddableTest {
 
+    public interface IAddable {
+        int add(int t1, int t2);
+    }
+
     IAddable addable = (a, b) -> a + b;
     IAddable addableViaMethodReference = this::addThemUp;
     IAddable addableViaMethodReference2 = Integer::sum;
-    IAddable addableViaMethodReference3 = AddableUtil::addThemUp;
+    IAddable addableViaMethodReference3 = AddableUtil::addThemUp; //note: static 메서드
     IAddable addableViaMethodReference4 = new AddableUtil2()::addThemUp;
 
 

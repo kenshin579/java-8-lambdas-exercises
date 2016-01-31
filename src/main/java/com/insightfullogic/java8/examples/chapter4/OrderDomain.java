@@ -12,7 +12,6 @@ public class OrderDomain extends Order {
         super(albums);
     }
 
-    // BEGIN body
     public long countFeature(ToLongFunction<Album> function) {
         return albums.stream()
                 .mapToLong(function)
@@ -32,5 +31,4 @@ public class OrderDomain extends Order {
     public long countMusicians() {
         return countFeature(album -> album.getMusicians().count());
     }
-    // END body
 }

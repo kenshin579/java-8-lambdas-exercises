@@ -1,7 +1,7 @@
 package com.insightfullogic.java8.examples.chapter7;
 
-import com.insightfullogic.java8.examples.chapter4.OrderDomain;
 import com.insightfullogic.java8.examples.chapter1.Album;
+import com.insightfullogic.java8.examples.chapter4.OrderDomain;
 import org.junit.Test;
 
 import static java.util.Arrays.asList;
@@ -13,8 +13,6 @@ import static org.junit.Assert.assertEquals;
  * previous chapter.
  */
 public class OrderDomainExampleTest {
-
-    // BEGIN can_count_albums
     @Test
     public void canCountFeatures() {
         OrderDomain order = new OrderDomain(asList(
@@ -25,7 +23,6 @@ public class OrderDomainExampleTest {
 
         assertEquals(8, order.countFeature(album -> 2));
     }
-    // END can_count_albums
 
     private Album newAlbum(String name) {
         return new Album(name, emptyList(), emptyList());
