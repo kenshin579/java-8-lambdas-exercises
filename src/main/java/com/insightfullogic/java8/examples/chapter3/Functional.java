@@ -7,7 +7,6 @@ public class Functional {
 
     private JButton button = new JButton();
 
-    // BEGIN field_assignment
     private ActionEvent lastEvent;
 
     private void registerHandler() {
@@ -15,7 +14,5 @@ public class Functional {
             this.lastEvent = event;
         });
     }
-    // END field_assignment
-
 
 }
