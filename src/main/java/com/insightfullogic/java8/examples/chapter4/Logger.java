@@ -17,31 +17,27 @@ public class Logger {
     }
 
     public void example() {
-        // BEGIN debug_optimised
         Logger logger = new Logger();
-        if (logger.isDebugEnabled()) {
+        if (logger.isDebugEnabled()) { //note: if가 없으면 expensiveOpeation()가 실행이 됨
             logger.debug("Look at this: " + expensiveOperation());
         }
-        // END debug_optimised
     }
 
     private String expensiveOperation() {
         return "expensiveOperation";
     }
 
-    // BEGIN debug_lambda
+
     public void debug(Supplier<String> message) {
         if (isDebugEnabled()) {
-            debug(message.get());
+            debug(message.get()); //note: expensiveOperation()이 여기서만 실행됨
         }
     }
-    // END debug_lambda
 
     public void exampleWithLambda() {
-        // BEGIN debug_optimised_lambda
         Logger logger = new Logger();
-        logger.debug(() -> "Look at this: " + expensiveOperation());
-        // END debug_optimised_lambda
+        logger.debug(() -> "Look at this: " + expensiveOperation()); //note: 여기 expensiveOperation()는 실행이 안됨.
+        
     }
 
     public static void main(String[] args) {
