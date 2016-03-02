@@ -1,6 +1,5 @@
 package com.insightfullogic.java8.examples.chapter5;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.HashSet;
@@ -26,22 +25,21 @@ public class EncounterOrderTest {
 
     }
 
-    // NB: to actually get this to fail you need to reverse the order of the numbers.
-    @Ignore
+    //리스트의 순서가 보증되지 않는 경우
     @Test
     public void hashSetToStream() {
         Set<Integer> numbers = new HashSet<>(asList(4, 3, 2, 1));
 
-        List<Integer> sameOrder = numbers.stream()
-                .collect(toList());
+        List<Integer> sameOrder = numbers.stream().collect(toList());
 
-        // This may not pass
+        //1,2,3,4
+
+        //이 테스트는 실패할 수 있다
         assertEquals(asList(4, 3, 2, 1), sameOrder);
     }
 
     @Test
     public void hashSetToStreamSorted() {
-
         Set<Integer> numbers = new HashSet<>(asList(4, 3, 2, 1));
 
         List<Integer> sameOrder = numbers.stream()
@@ -49,7 +47,6 @@ public class EncounterOrderTest {
                 .collect(toList());
 
         assertEquals(asList(1, 2, 3, 4), sameOrder);
-
     }
 
     @Test

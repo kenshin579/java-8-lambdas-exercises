@@ -224,10 +224,10 @@ public class StringExamples {
 
     public static void main(String[] args) {
 //        System.out.println(formatArtistsForLoop(SampleData.getThreeArtists()));
-//        System.out.println(formatArtists(SampleData.getThreeArtists()));
+        System.out.println(formatArtists(SampleData.getThreeArtists()));
 //        System.out.println(formatArtistsRefactor2(SampleData.getThreeArtists()));
 //        System.out.println(formatArtistsRefactor3(SampleData.getThreeArtists()));
-        System.out.println(formatArtistsRefactor5(SampleData.getThreeArtists()));
+//        System.out.println(formatArtistsRefactor5(SampleData.getThreeArtists()));
 //        reduce1();
 //        combiner1();
     }

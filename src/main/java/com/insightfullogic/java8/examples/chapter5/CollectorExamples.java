@@ -2,7 +2,6 @@ package com.insightfullogic.java8.examples.chapter5;
 
 import com.insightfullogic.java8.examples.chapter1.Album;
 import com.insightfullogic.java8.examples.chapter1.Artist;
-import com.insightfullogic.java8.examples.chapter1.SampleData;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -24,9 +23,23 @@ public class CollectorExamples {
 
     private static Logger LOG = LoggerFactory.getLogger(CollectorExamples.class);
 
+    public static void toCollectorCounting() {
+        Long result = Stream.of(1, 2, 3)
+                .collect(counting());
+        System.out.println(result);
+        //3
+    }
+
+    public static void toCollectorJoining() {
+        String result = Stream.of("Frank", "Angela", "David")
+                .collect(Collectors.joining(", ", "[", "]"));
+        //[Frank, Angela, David]
+
+        System.out.println(result);
+    }
+
     public static void toCollectionTreeset() {
         Stream<Integer> stream = Stream.of(1, 2, 3);
-
         stream.collect(toCollection(TreeSet::new));
     }
 
@@ -160,7 +173,46 @@ public class CollectorExamples {
 
     }
 
+    class Person {
+        String name;
+        int age;
+
+        Person(String name, int age) {
+            this.name = name;
+            this.age = age;
+        }
+
+        @Override
+        public String toString() {
+            return name;
+        }
+    }
+
+
+    private void groupingPersonByAge() {
+        List<Person> persons =
+                Arrays.asList(
+                        new Person("Max", 18),
+                        new Person("Peter", 23),
+                        new Person("Pamela", 23),
+                        new Person("David", 12));
+
+        Map<Integer, List<Person>> personsByAge = persons
+                .stream()
+                .collect(Collectors.groupingBy(p -> p.age));
+
+        personsByAge
+                .forEach((age, p) -> System.out.format("age %s: %s\n", age, p));
+        //age 18: [Max]
+        //age 23: [Peter, Pamela]
+        //age 12: [David]
+    }
+
+
     public static void main(String[] args) {
+        CollectorExamples ex = new CollectorExamples();
+//        ex.groupingPersonByAge();
+
 //        System.out.println(biggestGroup(SampleData.threeArtists()));
 //        System.out.println(averageNumberOfTracks(Arrays.asList(SampleData.sampleShortAlbum, SampleData.manyTrackAlbum, SampleData.aLoveSupreme)));
 //        System.out.println(bandsAndSolo(SampleData.threeArtists()));
@@ -171,8 +223,9 @@ public class CollectorExamples {
 //        System.out.println(numberOfAlbumsDumb(SampleData.albums));
 //        System.out.println(numberOfAlbums(SampleData.albums));
 //        System.out.println(nameOfAlbumsDumb(SampleData.albums));
-        System.out.println(nameOfAlbums(SampleData.albums));
-
+//        System.out.println(nameOfAlbums(SampleData.albums));
+//        toCollectorCounting();
+        toCollectorJoining();
     }
 }
 

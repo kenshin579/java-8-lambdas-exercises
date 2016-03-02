@@ -9,9 +9,13 @@ import org.junit.Test;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static java.util.Arrays.asList;
+import static org.hamcrest.Matchers.contains;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -38,6 +42,20 @@ public class TestingTest {
         String input = "ab";
         String result = Testing.firstToUppercase(input);
         assertEquals("Ab", result);
+    }
+
+    @Test
+    public void intermediate_peek() {
+        List<String> strings = Stream.of("Badgers", "finals", "four")
+                .filter(s -> s.length() >= 4)
+                .peek(s -> System.out.println(s))
+                .map(s -> s.toUpperCase())
+                .collect(Collectors.toList());
+        //Badgers
+        //finals
+        //four
+
+        assertThat(strings, contains("BADGERS", "FINALS", "FOUR"));
     }
 
     private List<Integer> otherList = Arrays.asList(1, 2, 3);
