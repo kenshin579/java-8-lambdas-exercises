@@ -8,7 +8,14 @@ import org.slf4j.LoggerFactory;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.StringJoiner;
+import java.util.TreeSet;
 import java.util.function.Function;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -33,6 +40,26 @@ public class CollectorExamples {
     public static void toCollectorJoining() {
         String result = Stream.of("Frank", "Angela", "David")
                 .collect(Collectors.joining(", ", "[", "]"));
+        //[Frank, Angela, David]
+
+        System.out.println(result);
+
+        StringJoiner sj1 = new StringJoiner(",", "[", "]");
+        StringJoiner sj2 = new StringJoiner(",", "[", "]");
+        StringJoiner js1 = sj1.add("test1");
+        System.out.println(js1); // [test1]
+
+        StringJoiner js2 = sj2.add("test2a").add("test2b");
+        js1.merge(js2);
+
+        System.out.println(js1); //[test2a,test2b]
+        System.out.println(js2); //[test1,test2a,test2b]
+    }
+
+    public static void toCollectorJoining2() {
+        String result = Arrays.asList("one", "two", "three", "four")
+                .parallelStream()
+                .collect(new MyStringCollector(", ", "[", "]"));
         //[Frank, Angela, David]
 
         System.out.println(result);
@@ -208,6 +235,33 @@ public class CollectorExamples {
         //age 12: [David]
     }
 
+    public static void Str2Sttr_Sequential_Stream() {
+        String result = Arrays.asList("one", "two", "three", "four")
+                .stream()
+                .reduce("",
+                        (accumulatedStr, str) -> {
+                            System.out.println("accumulatedStr: " + accumulatedStr + " str:" + str);
+                            return accumulatedStr + str;
+                        });  //accumulator
+        System.out.println(result);
+    }
+
+    public static void Str2Sttr_Parallel_Stream() {
+        int result = Arrays.asList("one", "two", "three", "four")
+                .parallelStream()
+                .reduce(0,
+                        (accumulatedInt, str) -> {
+                            System.out.println("acc: accumulatedInt: " + accumulatedInt + " str:" + str + " = " + accumulatedInt + str.length());
+                            return accumulatedInt + str.length();
+                        },
+                        (accumulatedInt, accumulatedInt2) -> {
+                            System.out.println("combiner: accumulatedInt: " + accumulatedInt + " accumulatedInt2:" + accumulatedInt2 + " = " + (accumulatedInt + accumulatedInt2));
+                            return accumulatedInt + accumulatedInt2;
+                        }
+                );
+
+        System.out.println(result);
+    }
 
     public static void main(String[] args) {
         CollectorExamples ex = new CollectorExamples();
@@ -225,7 +279,11 @@ public class CollectorExamples {
 //        System.out.println(nameOfAlbumsDumb(SampleData.albums));
 //        System.out.println(nameOfAlbums(SampleData.albums));
 //        toCollectorCounting();
-        toCollectorJoining();
+//        toCollectorJoining();
+//        toCollectorJoining2();
+//        Str2Sttr_Sequential_Stream();
+        Str2Sttr_Parallel_Stream();
     }
+
 }
 
